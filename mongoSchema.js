@@ -36,4 +36,3 @@ const qaSchema = new Schema({
 });
 
 const QA = mongoose.model('QA', qaSchema);
-sadsdasad
