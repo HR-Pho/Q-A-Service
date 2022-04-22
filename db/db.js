@@ -10,10 +10,11 @@ const pool = new Pool({
 });
 
 pool.connect();
-pool.query('SELECT $1::text as message', ['Hello world!'], (err, res) => {
-  console.log(err ? err.stack : res.rows[0].message) // Hello World!
-  pool.end()
-});
+
+// pool.query('SELECT $1::text as message', ['Hello world!'], (err, res) => {
+//   console.log(err ? err.stack : res.rows[0].message) // Hello World!
+//   pool.end()
+// });
 
 // module.exports = {
 //     query: (text, params, callback) => {
