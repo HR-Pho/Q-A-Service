@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { pool } = require('../db/db.js');
 const express = require('express');
-const { getQuestions, getAnswers } = require('../db/queryCity.js');
+const { getQuestions, getAnswers, postQuestion, postAnswer } = require('../db/queryCity.js');
 
 const app = express();
 app.use(express.json());
@@ -9,7 +9,7 @@ app.listen(process.env.PORT, () => {
   console.log(`QA server listening on port:'${process.env.PORT}`)
 });
 
-/*---------------------------------------------------------------------------------*/
+
 app.get('/TEST/:varyabowl/POSTMAN', (req, res) => {
   console.log(req.params.varyabowl);
   if (req.query) {
@@ -20,18 +20,11 @@ app.get('/TEST/:varyabowl/POSTMAN', (req, res) => {
 });
 
 app.get('/qa/questions', getQuestions);
-
 app.get('/qa/questions/:question_id/answers', getAnswers);
 
-/*---------------------------------------------------------------------------------*/
-// ADDS A QUESTIONS:
-// REQUEST FORMAT --  POST /qa/questions
+app.post('/qa/questions', postQuestion);
+app.post('/qa/questions/:question_id/answers', postAnswer);
 
-/*---------------------------------------------------------------------------------*/
-// ADDS AN ANSWER:
-// REQUEST FORMAT --  POST /qa/questions/:question_id/answers
-
-/*---------------------------------------------------------------------------------*/
 // MARK QUESTIONS AS HELPFUL:
 // REQUEST FORMAT --  PUT /qa/questions/:question_id/helpful
 

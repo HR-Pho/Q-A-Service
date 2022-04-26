@@ -28,7 +28,16 @@ module.exports = {
       .catch(err => res.status(500).send(err));
   },
 
-  postQuestion: '',
+  postQuestion: (req, res) => {
+    const { email, body, name, product_id } = req.query;
+    console.log(body, name, email, product_id);
+
+    pool
+      .query(`INSERT INTO questions (product_id, body, asker_name, asker_email, reported, helpful) VALUES ('${product_id}', '${body}', '${name}', '${email}', false, 0)`)
+      .then(result => res.status(201).send(result))
+      .catch(err => res.status(500).send(err));
+  },
+
   markQuestionHelpful: '',
   reportQuestion: '',
   getAnswers: (req, res) => {
@@ -58,7 +67,16 @@ module.exports = {
       .catch(err => res.status(500).send(err));
   },
 
-  postAnswer: '',
+  postAnswer: (req, res) => {
+    const { email, body, name } = req.query;
+    const { questionId } = req.params;
+    console.log(body, name, email, questionId);
+
+    pool
+      .query(`INSERT INTO answers (question_id, body, answerer_name, answerer_email, reported, helpful) VALUES ('${questionId}', ${body}', '${name}', '${email}', false, 0)`)
+      .then(result => res.status(204).send(result))
+      .catch(err => res.status(500).send(err));
+  },
   markAnswerHelpful: '',
   reportAnswer: ''
 }

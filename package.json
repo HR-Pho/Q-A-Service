@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "initialize-db": "psql -U postgres -d QA -f /Users/matthewluu/hackreactor/rfp2202/Q-A-Service/db/schema.sql",
+    "seed-db": "psql -U postgres -d QA -f /Users/matthewluu/hackreactor/rfp2202/Q-A-Service/db/seed.sql"
   },
   "repository": {
     "type": "git",
