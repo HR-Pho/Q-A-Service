@@ -94,11 +94,20 @@ module.exports = {
 
   markAnswerHelpful: (req, res) => {
     console.log('req.params.answer_id: ', req.params.answer_id);
-    res.status(204).send();
+    const { answer_id } = req.params;
+    pool
+      .query(`UPDATE answers SET helpful = helpful + 1 WHERE id = ${answer_id}`)
+      .then(result => {
+        res.status(204).send(result);
+      })
+      .catch(err => res.status(500).send(err));
   },
 
 
-  reportAnswer: (req, res) => {}
+
+  reportAnswer: (req, res) => {
+
+  }
 
 }
 
