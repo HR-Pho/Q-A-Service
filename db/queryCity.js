@@ -40,18 +40,21 @@ module.exports = {
 
 
   markQuestionHelpful: (req, res) => {
-    console.log('req.params.question_id: ', req.params.question_id);
     const { question_id } = req.params;
     pool
       .query(`UPDATE questions SET helpful = helpful + 1 WHERE id = ${question_id}`)
-      .then(result => {
-        res.status(204).send(result);
-      })
+      .then(() => res.status(204).send())
       .catch(err => res.status(500).send(err));
   },
 
 
-  reportQuestion: (req, res) => {},
+  reportQuestion: (req, res) => {
+    const { question_id } = req.params;
+    pool
+      .query(`UPDATE questions SET reported = true WHERE id = ${question_id}`)
+      .then(() => res.status(204).send())
+      .catch(err => res.status(500).send(err));
+  },
 
 
   getAnswers: (req, res) => {
@@ -93,21 +96,20 @@ module.exports = {
 
 
   markAnswerHelpful: (req, res) => {
-    console.log('req.params.answer_id: ', req.params.answer_id);
     const { answer_id } = req.params;
     pool
       .query(`UPDATE answers SET helpful = helpful + 1 WHERE id = ${answer_id}`)
-      .then(result => {
-        res.status(204).send(result);
-      })
+      .then(() => res.status(204).send())
       .catch(err => res.status(500).send(err));
   },
 
 
-
   reportAnswer: (req, res) => {
-
+    const { answer_id } = req.params;
+    pool
+      .query(`UPDATE answers SET reported = true WHERE id = ${answer_id}`)
+      .then(() => res.status(204).send())
+      .catch(err => res.status(500).send(err));
   }
-
 }
 
