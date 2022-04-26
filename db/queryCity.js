@@ -88,7 +88,7 @@ module.exports = {
     const { question_id } = req.params
     pool
       .query(`INSERT INTO answers (question_id, body, answerer_name, answerer_email, reported, helpful) VALUES ('${question_id}', '${body}', '${name}', '${email}', false, 0)`)
-      .then(result => res.status(204).send(result))
+      .then(result => res.status(201).send(result))
       .catch(err => res.status(500).send(err));
   },
 
