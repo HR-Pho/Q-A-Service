@@ -39,10 +39,19 @@ module.exports = {
   },
 
 
-  markQuestionHelpful: '',
+  markQuestionHelpful: (req, res) => {
+    console.log('req.params.question_id: ', req.params.question_id);
+    const { question_id } = req.params;
+    pool
+      .query(`UPDATE questions SET helpful = helpful + 1 WHERE id = ${question_id}`)
+      .then(result => {
+        res.status(204).send(result);
+      })
+      .catch(err => res.status(500).send(err));
+  },
 
 
-  reportQuestion: '',
+  reportQuestion: (req, res) => {},
 
 
   getAnswers: (req, res) => {
@@ -83,10 +92,13 @@ module.exports = {
   },
 
 
-  markAnswerHelpful: '',
+  markAnswerHelpful: (req, res) => {
+    console.log('req.params.answer_id: ', req.params.answer_id);
+    res.status(204).send();
+  },
 
 
-  reportAnswer: ''
+  reportAnswer: (req, res) => {}
 
 }
 
