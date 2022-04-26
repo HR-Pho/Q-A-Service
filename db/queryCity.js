@@ -1,7 +1,5 @@
 const { pool } = require('./db.js');
-
 module.exports = {
-
   getQuestions: (req, res) => {
     let { product_id, count = 5, page = 1 } = req.query;
     const payload = {
