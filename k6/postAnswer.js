@@ -12,9 +12,19 @@ export const options = {
   ],
 };
 
-
 export default function () {
-  const res = http.get(`http://localhost:3000/qa/questions/${Math.floor(Math.random() * 3000000)}/answers`);
-  // check(res, { 'status was 200': (r) => r.status == 200 });
+  const url = `http://localhost:3000/qa/questions/${Math.floor(Math.random() * 3000000)}/answers`;
+  const payload = JSON.stringify({
+    body: 'bodybodybody',
+    name: 'namenamename',
+    email: 'email@gmail.com'
+  });
+  const params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const res = http.post(url, payload, params);
   sleep(1);
 }
