@@ -1,17 +1,5 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-/* ---- SCHEMA TYPES ----
-String
-Number
-Date
-Buffer
-Boolean
-Mixed
-ObjectId
-Array
-Decimal128
-Map
-*/
 
 //mongoose auto creates ids
 const qaSchema = new Schema({
