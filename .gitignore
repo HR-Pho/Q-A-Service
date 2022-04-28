@@ -10,3 +10,5 @@ node_modules/
 .eslintcache
 
 .DS_Store
+
+db/olderQueries.js
