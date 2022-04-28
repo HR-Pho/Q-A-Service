@@ -18,8 +18,7 @@ module.exports = {
               question_date: date_written,
               asker_name: asker_name,
               question_helpfulness: helpful,
-              reported: reported,
-              answers: {},
+              reported: reported
           })
         }
         res.status(200).send(payload);
@@ -76,6 +75,15 @@ module.exports = {
             helpfulness: helpful,
             photos: []
           });
+          //gotta snag them photos for each answer too
+          pool
+            .query(`SELECT * FROM photos WHERE answer_id = ${id}`)
+            .then(resultPartTwo => {
+              for (let j = 0; j < resultPartTwo.rows.length; j++) {
+                payload.results.photos.push(resultPartTwo.rows[j].url);
+              }
+            })
+            .catch(err => res.status(500).send(err));
         }
         res.status(200).send(payload);
       })
