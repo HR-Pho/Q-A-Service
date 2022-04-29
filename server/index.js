@@ -8,6 +8,8 @@ app.listen(process.env.PORT, () => {
   console.log(`QA server listening on port:'${process.env.PORT}`)
 });
 
+app.get('/test/server', (req, res) => {res.send({results: 'success'})});
+
 app.get('/qa/questions', getQuestions);
 app.get('/qa/questions/:question_id/answers', getAnswers);
 
